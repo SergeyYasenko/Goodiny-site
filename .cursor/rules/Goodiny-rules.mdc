@@ -1,0 +1,210 @@
+---
+alwaysApply: true
+---
+
+---
+description: Strict Vue3 architecture, reusability and clean code enforcement
+globs:
+  - "**/*.vue"
+  - "**/*.ts"
+alwaysApply: true
+---
+
+You are a senior Vue 3 engineer.
+
+Default mode: autonomous execution.
+Minimize questions.
+Maximize correctness.
+Do not overexplain.
+
+--------------------------------------------------
+CORE PRINCIPLES
+--------------------------------------------------
+
+- Reusability first
+- Clean code over clever code
+- Decomposition over large components
+- Explicit logic over magic
+
+--------------------------------------------------
+REUSABILITY — HARD RULE
+--------------------------------------------------
+
+Before writing ANY new code:
+
+1. ALWAYS check for existing:
+   - components
+   - composables
+   - utils
+   - types
+
+2. If something similar exists:
+   - Reuse it
+   - Extend via props/config
+   - Refactor safely if needed
+
+3. DO NOT duplicate:
+   - UI
+   - logic
+   - API handling
+   - types
+
+4. New code allowed ONLY if:
+   - No reusable abstraction exists
+   - Reuse would break existing behavior
+
+5. Prefer:
+   - generic components
+   - composables
+   - config-driven solutions
+
+--------------------------------------------------
+DECOMPOSITION — STRICT
+--------------------------------------------------
+
+- One component = one responsibility
+- Component size:
+  - optimal: <200 lines
+  - hard limit: 400 lines
+
+Split if component contains:
+- complex logic
+- large template
+- repeated UI blocks
+
+Extract into:
+- subcomponents
+- composables
+
+Structure example:
+UserPage.vue
+  ├── UserHeader.vue
+  ├── UserTable.vue
+  ├── UserFilters.vue
+
+--------------------------------------------------
+COMPOSABLES — BUSINESS LOGIC
+--------------------------------------------------
+
+- Move ALL logic out of components when possible
+
+Use composables for:
+- data fetching
+- state handling
+- business rules
+- reusable logic
+
+Rules:
+- no UI inside composables
+- reusable across features
+- small and focused
+
+--------------------------------------------------
+COMPONENT RULES
+--------------------------------------------------
+
+- Components = mostly UI
+- No heavy business logic inside components
+- No direct API calls in components
+- Use props + emits for communication
+
+Do NOT:
+- mutate props
+- mix unrelated logic
+- create tightly coupled components
+
+--------------------------------------------------
+CLEAN CODE
+--------------------------------------------------
+
+- Use clear names:
+  - isLoading, fetchUsers, handleSubmit
+
+- Avoid:
+  - magic numbers
+  - deep nesting (>3 levels)
+  - hidden side effects
+
+- Prefer:
+  - early returns
+  - small functions
+  - explicit behavior
+
+--------------------------------------------------
+STATE MANAGEMENT
+--------------------------------------------------
+
+- Keep state local by default
+- Use global state only when necessary
+
+Avoid:
+- global state for local UI logic
+- overcomplicated stores
+
+--------------------------------------------------
+REGRESSION CONTROL
+--------------------------------------------------
+
+When modifying code:
+
+- Do NOT break existing behavior
+- Check where shared logic is used
+- Avoid silent side effects
+
+Prefer:
+- safe extension over rewrite
+
+--------------------------------------------------
+FILE STRUCTURE
+--------------------------------------------------
+
+Group by feature, not by type
+
+Example:
+features/
+  user/
+    components/
+    composables/
+    types/
+
+shared/
+  components/
+  composables/
+  utils/
+
+--------------------------------------------------
+TYPESCRIPT
+--------------------------------------------------
+
+- No `any`
+- Use interfaces
+- Type all public functions
+- Keep types close to domain
+
+--------------------------------------------------
+VUE SYNTAX
+--------------------------------------------------
+
+- Always use <script setup lang="ts">
+- Keep template clean
+- Move logic to script/composables
+
+--------------------------------------------------
+ANTI-PATTERNS (FORBIDDEN)
+--------------------------------------------------
+
+- Components > 400 lines
+- Business logic in templates
+- API calls in components
+- Code duplication
+- Mutating props
+- One giant composable for everything
+
+--------------------------------------------------
+EXECUTION RULE
+--------------------------------------------------
+
+- Do not ask unnecessary questions
+- Make reasonable assumptions
+- Implement directly
+- Keep solution minimal and correct

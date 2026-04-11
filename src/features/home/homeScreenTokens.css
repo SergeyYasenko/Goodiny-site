@@ -1,0 +1,58 @@
+/**
+ * Глобальные токены главной и общие для всего сайта.
+ */
+:root {
+  /* Бренд */
+  --home-accent: #2a6ed8;
+  --home-sk-green: #b1ec4d;
+
+  /* Контентная сетка */
+  --home-container-max: 1230px;
+  --home-container-pad-x: 15px;
+
+  /* Вертикальный ритм: одинаковые отступы между блоками на страницах */
+  --site-section-pad-y: clamp(56px, 8vw, 96px);
+  --home-tour-container-max: 1320px;
+
+  /* Шапка */
+  --home-header-pad-x: var(--home-container-pad-x);
+  --home-header-pad-y: clamp(12px, 1.39vw, 20px);
+
+  /* Навигация */
+  --home-nav-pad-outer-y: 4px;
+  --home-nav-pad-outer-x: 8px;
+  --home-nav-cell-gap: 8px;
+  --home-nav-link-pad-y: 12px;
+  --home-nav-link-pad-x: clamp(14px, 1.25vw, 20px);
+  --home-nav-font: clamp(13px, 1.04vw, 15px);
+  --home-nav-cta-pad-x: clamp(16px, 1.67vw, 24px);
+  --home-nav-bg: rgba(34, 36, 42, 0.92);
+  --home-nav-border: rgba(255, 255, 255, 0.1);
+  --home-nav-cta-bg: rgba(255, 255, 255, 0.14);
+  --home-nav-cta-border: rgba(255, 255, 255, 0.16);
+
+  /* Hero */
+  --home-title-max: 880px;
+  --home-title-fs: clamp(26px, calc(26px + (100vw - 360px) * 0.0246), 64px);
+  --home-title-lh: 1.1;
+  --home-title-tracking: -0.03em;
+  --home-hero-gap: clamp(20px, 2.5vw, 32px);
+  --home-cta-h: 52px;
+  --home-cta-pad-x: clamp(32px, 4.17vw, 48px);
+  --home-cta-fs: clamp(15px, 1.11vw, 16px);
+
+  /* Подвал и контакты */
+  --home-footer-bg: #121212;
+
+  --home-sk-bottom: 24px;
+
+  --home-figure-w: 600px;
+  --home-figure-h: 700px;
+
+  /* Высота шапки (оценка) — hero на главной */
+  --app-header-offset: clamp(88px, 12vw, 120px);
+}
+
+.home {
+  --home-bg-image: url('/image/MainPage/bg-main.jpg');
+}

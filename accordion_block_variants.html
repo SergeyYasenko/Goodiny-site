@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Варианты блока</title>
+  <style>
+    :root {
+      --bg: #111315;
+      --panel: rgba(255,255,255,0.06);
+      --panel-2: rgba(255,255,255,0.04);
+      --stroke: rgba(255,255,255,0.12);
+      --text: #f4f6f8;
+      --muted: rgba(244,246,248,0.72);
+      --blue: #2f80ff;
+      --blue-soft: rgba(47,128,255,0.24);
+      --shadow: 0 18px 60px rgba(0,0,0,0.35);
+      --radius-xl: 26px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --max: 1220px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(47,128,255,0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.04), transparent 18%),
+        linear-gradient(180deg, #141618 0%, #0f1113 100%);
+      color: var(--text);
+      padding: 48px 22px 90px;
+    }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .hero {
+      max-width: 860px;
+      margin-bottom: 40px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      backdrop-filter: blur(14px);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+
+    .accent { color: var(--blue); }
+
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(15px, 1.8vw, 18px);
+      line-height: 1.6;
+      max-width: 760px;
+    }
+
+    .variants {
+      display: grid;
+      gap: 26px;
+      margin-top: 34px;
+    }
+
+    .variant {
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      border-radius: 30px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .variant::before {
+      content: "";
+      position: absolute;
+      inset: -30% auto auto -10%;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(47,128,255,0.14), transparent 68%);
+      pointer-events: none;
+    }
+
+    .variant-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .variant-title {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .variant-note {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 760px;
+      font-size: 14px;
+    }
+
+    .tag {
+      white-space: nowrap;
+      border: 1px solid rgba(47,128,255,0.24);
+      background: rgba(47,128,255,0.08);
+      color: #b9d1ff;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .accordion {
+      display: grid;
+      gap: 14px;
+    }
+
+    .item {
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .item button {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--stroke);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 20px;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      cursor: pointer;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      backdrop-filter: blur(18px);
+    }
+
+    .item button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(47,128,255,0.28);
+    }
+
+    .left {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .num {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #dce8ff;
+      background: linear-gradient(180deg, rgba(47,128,255,0.22), rgba(47,128,255,0.08));
+      border: 1px solid rgba(47,128,255,0.22);
+      flex: 0 0 auto;
+    }
+
+    .title {
+      font-size: clamp(18px, 2vw, 28px);
+      font-weight: 650;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #3387ff, #2370eb);
+      color: white;
+      flex: 0 0 auto;
+      box-shadow: 0 10px 24px rgba(47,128,255,0.26);
+      transition: transform 0.25s ease;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+
+    .content-inner {
+      padding: 0 22px 18px 76px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .item.open button {
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.045));
+      border-color: rgba(47,128,255,0.34);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 12px 28px rgba(0,0,0,0.18);
+    }
+
+    .item.open .icon {
+      transform: rotate(180deg);
+    }
+
+    /* Variant 1 */
+    .v1 .item button {
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10), rgba(255,255,255,0.02) 42%, rgba(255,255,255,0.03) 100%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+    }
+
+    /* Variant 2 */
+    .v2 .item {
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.025);
+      border-radius: 22px;
+      position: relative;
+    }
+
+    .v2 .item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 14px;
+      bottom: 14px;
+      width: 3px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(47,128,255,0.95), rgba(47,128,255,0.16));
+      opacity: 0.8;
+    }
+
+    .v2 .item button {
+      border: 0;
+      border-radius: 22px;
+      background: transparent;
+      padding-left: 24px;
+      box-shadow: none;
+    }
+
+    .v2 .num {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.84);
+    }
+
+    .v2 .content-inner {
+      padding-left: 78px;
+    }
+
+    /* Variant 3 */
+    .v3 .accordion {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .v3 .item button {
+      min-height: 122px;
+      align-items: flex-start;
+      padding: 24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025)),
+        radial-gradient(circle at top right, rgba(47,128,255,0.18), transparent 34%);
+    }
+
+    .v3 .left {
+      align-items: flex-start;
+    }
+
+    .v3 .title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .v3 .micro {
+      color: #9ebfff;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .v3 .content-inner {
+      padding: 0 24px 22px 24px;
+    }
+
+    .v3 .item.open button {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)),
+        radial-gradient(circle at top right, rgba(47,128,255,0.24), transparent 40%);
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      color: rgba(244,246,248,0.55);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .v3 .accordion {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 28px 14px 60px; }
+      .variant { padding: 18px; border-radius: 24px; }
+      .variant-head { flex-direction: column; }
+      .tag { white-space: normal; }
+      .item button { padding: 18px 16px; border-radius: 18px; }
+      .title { font-size: 18px; }
+      .num { width: 34px; height: 34px; border-radius: 10px; }
+      .icon { width: 36px; height: 36px; }
+      .content-inner { padding: 0 16px 16px 16px; }
+      .v2 .content-inner { padding-left: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">UI-концепт • темная премиальная гамма</div>
+      <h1>Несколько вариантов блока в той же <span class="accent">цветовой стилистике</span>, но с более аккуратной подачей</h1>
+      <p class="sub">Ниже три разные интерпретации: более премиальная стеклянная, более строгая линейная и карточная модульная. Во всех вариантах сохранены темный фон, холодные серые градиенты и синий акцент.</p>
+    </section>
+
+    <div class="variants">
+      <section class="variant v1">
+        <div class="variant-head">
+          <div>
+            <h2 class="variant-title">Вариант 1 — Premium Glass Accordion</h2>
+            <p class="variant-note">Самый близкий к текущей идее, но выглядит чище за счет лучших отступов, иерархии, нумерации и более мягкого glass-эффекта.</p>
+          </div>
+          <div class="tag">Подойдет для hero / лендинга</div>
+        </div>
+
+        <div class="accordion" data-accordion>
+          <div class="item open">
+            <button type="button">
+              <div class="left">
+                <div class="num">01</div>
+                <div class="title">Продуманный дизайн офиса</div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content" style="max-height: 200px;">
+              <div class="content-inner">Планировка, сценарии перемещения клиента, зоны ожидания и визуальные акценты проектируются так, чтобы пространство усиливало доверие и помогало менеджеру вести клиента по воронке.</div>
+            </div>
+          </div>
+
+          <div class="item">
+            <button type="button">
+              <div class="left">
+                <div class="num">02</div>
+                <div class="title">Настройка офиса</div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content"><div class="content-inner">Настраиваются контент, экраны, маршруты, презентационные точки и сценарии консультации, чтобы офис работал как управляемый инструмент продаж.</div></div>
+          </div>
+
+          <div class="item">
+            <button type="button">
+              <div class="left">
+                <div class="num">03</div>
+                <div class="title">Цифровой двойник</div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content"><div class="content-inner">Цифровая модель пространства позволяет заранее тестировать пользовательские сценарии, визуальные материалы и точки взаимодействия до запуска.</div></div>
+          </div>
+
+          <div class="item">
+            <button type="button">
+              <div class="left">
+                <div class="num">04</div>
+                <div class="title">Запуск и поддержка</div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content"><div class="content-inner">После внедрения команда сопровождает процесс, собирает обратную связь, корректирует материалы и поддерживает стабильную работу интерактивной среды.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="variant v2">
+        <div class="variant-head">
+          <div>
+            <h2 class="variant-title">Вариант 2 — Minimal Neon Line</h2>
+            <p class="variant-note">Более строгий и современный вариант. Смотрится легче, дороже и технологичнее. Хорошо подойдет, если сайт в целом минималистичный.</p>
+          </div>
+          <div class="tag">Подойдет для B2B / tech-подачи</div>
+        </div>
+
+        <div class="accordion" data-accordion>
+          <div class="item open">
+            <button type="button">
+              <div class="left">
+                <div class="num">01</div>
+                <div class="title">Продуманный дизайн офиса</div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content" style="max-height: 200px;"><div class="content-inner">Архитектура пространства строится как часть бизнес-процесса: каждая зона выполняет конкретную функцию в удержании внимания и повышении конверсии.</div></div>
+          </div>
+
+          <div class="item">
+            <button type="button">
+              <div class="left">
+                <div class="num">02</div>
+                <div class="title">Настройка офиса</div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content"><div class="content-inner">Прорабатываются навигация, демонстрационные элементы, порядок коммуникации и точки захвата интереса клиента внутри пространства.</div></div>
+          </div>
+
+          <div class="item">
+            <button type="button">
+              <div class="left">
+                <div class="num">03</div>
+                <div class="title">Цифровой двойник</div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content"><div class="content-inner">Интерактивная цифровая среда помогает показать объект убедительно, гибко обновлять материалы и масштабировать презентацию без потери качества.</div></div>
+          </div>
+
+          <div class="item">
+            <button type="button">
+              <div class="left">
+                <div class="num">04</div>
+                <div class="title">Запуск и поддержка</div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content"><div class="content-inner">После запуска система не остается статичной: ведется сопровождение, обновление контента и оптимизация сценариев использования под реальную работу офиса.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="variant v3">
+        <div class="variant-head">
+          <div>
+            <h2 class="variant-title">Вариант 3 — Modular Feature Cards</h2>
+            <p class="variant-note">Менее похож на классический аккордеон и больше на премиальные карточки. Выглядит современно и удобно, особенно если на сайте много визуальных блоков.</p>
+          </div>
+          <div class="tag">Подойдет для более дизайнерской подачи</div>
+        </div>
+
+        <div class="accordion" data-accordion>
+          <div class="item open">
+            <button type="button">
+              <div class="left">
+                <div class="num">01</div>
+                <div class="title-wrap">
+                  <div class="micro">пространство</div>
+                  <div class="title">Продуманный дизайн офиса</div>
+                </div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content" style="max-height: 220px;"><div class="content-inner">Физическое пространство формирует первое впечатление и влияет на восприятие продукта не меньше, чем презентация или переговоры.</div></div>
+          </div>
+
+          <div class="item">
+            <button type="button">
+              <div class="left">
+                <div class="num">02</div>
+                <div class="title-wrap">
+                  <div class="micro">операционная среда</div>
+                  <div class="title">Настройка офиса</div>
+                </div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content"><div class="content-inner">Контент, маршруты взаимодействия и точки демонстрации настраиваются под нужный бизнес-сценарий и тип клиента.</div></div>
+          </div>
+
+          <div class="item">
+            <button type="button">
+              <div class="left">
+                <div class="num">03</div>
+                <div class="title-wrap">
+                  <div class="micro">визуализация</div>
+                  <div class="title">Цифровой двойник</div>
+                </div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content"><div class="content-inner">Позволяет показать проект глубже, гибче и эффектнее, чем статичная презентация или стандартный офис продаж.</div></div>
+          </div>
+
+          <div class="item">
+            <button type="button">
+              <div class="left">
+                <div class="num">04</div>
+                <div class="title-wrap">
+                  <div class="micro">сопровождение</div>
+                  <div class="title">Запуск и поддержка</div>
+                </div>
+              </div>
+              <div class="icon">⌄</div>
+            </button>
+            <div class="content"><div class="content-inner">На финальном этапе обеспечиваются ввод в эксплуатацию, адаптация команды и поддержка системы после запуска.</div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <p class="footer-note">Все тексты и стили легко можно адаптировать под ваш реальный лендинг. По желанию можно следующий шагом собрать 1 финальный вариант уже под ваш бренд и сетку сайта.</p>
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-accordion]').forEach((accordion) => {
+      accordion.querySelectorAll('.item button').forEach((button) => {
+        button.addEventListener('click', () => {
+          const item = button.parentElement;
+          const content = item.querySelector('.content');
+          const isOpen = item.classList.contains('open');
+
+          accordion.querySelectorAll('.item').forEach((other) => {
+            other.classList.remove('open');
+            other.querySelector('.content').style.maxHeight = '0px';
+          });
+
+          if (!isOpen) {
+            item.classList.add('open');
+            content.style.maxHeight = content.scrollHeight + 'px';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
