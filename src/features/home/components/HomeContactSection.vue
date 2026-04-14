@@ -3,7 +3,7 @@ import { HOME_CONTACT } from '../constants/homeContact.js'
 </script>
 
 <template>
-  <section class="contact" id="contacts" aria-labelledby="contact-heading">
+  <section v-scroll-reveal class="contact" id="contacts" aria-labelledby="contact-heading">
     <div class="contact__inner">
       <h2 id="contact-heading" class="contact__heading">
         <span class="contact__heading-line">Контактная</span>

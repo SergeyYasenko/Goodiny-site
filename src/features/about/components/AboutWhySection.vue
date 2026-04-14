@@ -55,7 +55,7 @@ const cards: WhyCard[] = [
 </script>
 
 <template>
-  <section class="why" aria-labelledby="why-heading">
+  <section v-scroll-reveal class="why" aria-labelledby="why-heading">
     <div class="why__inner">
       <h1 id="why-heading" class="why__title">
         Почему <span class="why__title-accent">выбирают</span>

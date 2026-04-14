@@ -39,7 +39,7 @@ function toggle(index) {
 </script>
 
 <template>
-  <section class="proc" id="process" aria-labelledby="proc-heading">
+  <section v-scroll-reveal class="proc" id="process" aria-labelledby="proc-heading">
     <div class="proc__inner">
       <h2 id="proc-heading" class="proc__heading">
         Интерактивный бизнес-процесс, обеспечивающий
@@ -76,14 +76,17 @@ function toggle(index) {
             <div
               :id="`proc-panel-${index}`"
               class="proc-item__panel"
+              :class="{ 'proc-item__panel--open': openIndex === index }"
               role="region"
               :aria-labelledby="`proc-trigger-${index}`"
-              :hidden="openIndex !== index"
+              :aria-hidden="openIndex !== index"
             >
-              <p class="proc-item__text">{{ item.text }}</p>
-              <ul class="proc-item__tags" aria-label="Ключевые направления">
-                <li v-for="tag in item.tags" :key="tag" class="proc-item__tag">{{ tag }}</li>
-              </ul>
+              <div class="proc-item__panel-inner">
+                <p class="proc-item__text">{{ item.text }}</p>
+                <ul class="proc-item__tags" aria-label="Ключевые направления">
+                  <li v-for="tag in item.tags" :key="tag" class="proc-item__tag">{{ tag }}</li>
+                </ul>
+              </div>
             </div>
           </div>
         </li>
@@ -138,7 +141,7 @@ function toggle(index) {
   margin: 0;
 }
 
-/* Вариант 2 — Minimal Neon Line (accordion_block_variants.html) */
+/* Вариант 2 — Minimal Neon Line */
 .proc-item__card {
   --proc-accent: var(--home-accent, #2a6ed8);
   position: relative;
@@ -270,11 +273,24 @@ function toggle(index) {
 }
 
 .proc-item__panel {
-  padding: 0 22px 18px 78px;
+  max-height: 0;
+  opacity: 0;
+  transform: translate3d(0, -6px, 0);
+  overflow: hidden;
+  transition:
+    max-height 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease,
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.proc-item__panel[hidden] {
-  display: none;
+.proc-item__panel--open {
+  max-height: 380px;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.proc-item__panel-inner {
+  padding: 0 22px 18px 78px;
 }
 
 .proc-item__text {
@@ -311,6 +327,14 @@ function toggle(index) {
   }
 
   .proc-item__panel {
+    transform: none;
+  }
+
+  .proc-item__panel--open {
+    max-height: 460px;
+  }
+
+  .proc-item__panel-inner {
     padding: 0 16px 16px 16px;
   }
 

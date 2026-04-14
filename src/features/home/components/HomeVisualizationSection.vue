@@ -28,7 +28,7 @@ const rows = [
 </script>
 
 <template>
-  <section class="viz" id="product" aria-labelledby="viz-heading">
+  <section v-scroll-reveal class="viz" id="product" aria-labelledby="viz-heading">
     <div class="viz__inner">
       <h2 id="viz-heading" class="viz__heading">
         Новый уровень <span class="viz__accent">визуализации</span> недвижимости
@@ -189,7 +189,7 @@ const rows = [
   object-position: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .viz__intro {
     grid-template-columns: 1fr;
   }
@@ -198,19 +198,11 @@ const rows = [
     grid-template-columns: 1fr;
   }
 
-  .viz-row:not(.viz-row--reverse) .viz-row__text {
+  .viz-row .viz-row__text {
     order: 1;
   }
 
-  .viz-row:not(.viz-row--reverse) .viz-row__media {
-    order: 2;
-  }
-
-  .viz-row--reverse .viz-row__media {
-    order: 1;
-  }
-
-  .viz-row--reverse .viz-row__text {
+  .viz-row .viz-row__media {
     order: 2;
   }
 }

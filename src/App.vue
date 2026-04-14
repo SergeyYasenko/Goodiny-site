@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import HomeSiteHeader from './features/home/components/HomeSiteHeader.vue'
 import HomeFooter from './features/home/components/HomeFooter.vue'
+import LeadRequestModal from './shared/components/LeadRequestModal.vue'
 </script>
 
 <template>
@@ -15,6 +16,7 @@ import HomeFooter from './features/home/components/HomeFooter.vue'
       </RouterView>
     </main>
     <HomeFooter />
+    <LeadRequestModal />
   </div>
 </template>
 

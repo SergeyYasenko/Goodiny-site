@@ -2,5 +2,9 @@ import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
 import { router } from './router'
+import { scrollRevealDirective } from './shared/directives/scrollReveal'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+app.use(router)
+app.directive('scroll-reveal', scrollRevealDirective)
+app.mount('#app')

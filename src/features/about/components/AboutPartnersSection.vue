@@ -41,7 +41,7 @@ const trackStyle = computed(() => ({
 </script>
 
 <template>
-  <section class="partners" aria-labelledby="partners-heading">
+  <section v-scroll-reveal class="partners" aria-labelledby="partners-heading">
     <div class="partners__inner">
       <h2 id="partners-heading" class="partners__title">Наши партнеры</h2>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
 import ProductProcessStepCard from './ProductProcessStepCard.vue'
+import { useLeadRequestModal } from '../../../shared/composables/useLeadRequestModal'
 import {
   PRODUCT_PROCESS_SECTION_TITLE_PREFIX,
   PRODUCT_PROCESS_SECTION_TITLE_ACCENT,
@@ -8,10 +8,12 @@ import {
   PRODUCT_PROCESS_CTA_TITLE,
   PRODUCT_PROCESS_CTA_LEAD,
 } from '../constants/productProcess'
+
+const { openLeadRequestModal } = useLeadRequestModal()
 </script>
 
 <template>
-  <section class="product-process" aria-labelledby="product-process-heading">
+  <section v-scroll-reveal class="product-process" aria-labelledby="product-process-heading">
     <h2 id="product-process-heading" class="product-process__title">
       {{ PRODUCT_PROCESS_SECTION_TITLE_PREFIX }}<span class="product-process__title-accent">{{ PRODUCT_PROCESS_SECTION_TITLE_ACCENT }}</span>
     </h2>
@@ -33,9 +35,9 @@ import {
     <div class="product-process__cta-block">
       <h3 class="product-process__cta-title">{{ PRODUCT_PROCESS_CTA_TITLE }}</h3>
       <p class="product-process__cta-lead">{{ PRODUCT_PROCESS_CTA_LEAD }}</p>
-      <RouterLink class="product-process__cta" :to="{ name: 'home', hash: '#contacts' }">
+      <button type="button" class="product-process__cta" @click="openLeadRequestModal">
         Оставить заявку
-      </RouterLink>
+      </button>
     </div>
   </section>
 </template>
@@ -125,6 +127,7 @@ import {
   text-decoration: none;
   background: var(--home-accent, #2a6ed8);
   border: 1px solid rgba(255, 255, 255, 0.22);
+  cursor: pointer;
   transition: filter 0.15s ease;
 }
 

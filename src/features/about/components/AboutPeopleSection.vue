@@ -31,7 +31,7 @@ const team = {
 </script>
 
 <template>
-  <section class="people" aria-labelledby="people-heading">
+  <section v-scroll-reveal class="people" aria-labelledby="people-heading">
     <div class="people__inner">
       <h2 id="people-heading" class="people__title">
         Люди, которые создают будущее

@@ -38,7 +38,7 @@ const phoneDisplay = `+${HOME_CONTACT.phone}`
 </script>
 
 <template>
-  <section class="proj-lead" id="lead" aria-labelledby="proj-lead-heading">
+  <section v-scroll-reveal class="proj-lead" id="lead" aria-labelledby="proj-lead-heading">
     <div class="proj-lead__grid">
       <div class="proj-lead__info">
         <h2 id="proj-lead-heading" class="proj-lead__title">{{ PROJECTS_LEAD_TITLE }}</h2>

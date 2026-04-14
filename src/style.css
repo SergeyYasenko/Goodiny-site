@@ -33,6 +33,28 @@ a {
   min-height: 100vh;
 }
 
+/* v-scroll-reveal: появление при скролле (заметнее сдвиг + чуть «выплывание») */
+.gi-reveal {
+  opacity: 0;
+  transform: translate3d(0, 36px, 0) scale(0.98);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.32, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.32, 1);
+}
+
+.gi-reveal.gi-reveal--visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gi-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .main {
   flex: 1;
   width: 100%;

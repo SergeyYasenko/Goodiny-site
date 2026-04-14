@@ -17,12 +17,12 @@ const {
 
 <template>
   <div class="projects-page">
-    <header class="projects-page__hero">
+    <header v-scroll-reveal class="projects-page__hero">
       <h1 class="projects-page__title">{{ PROJECTS_HERO_TITLE }}</h1>
       <p class="projects-page__lead">{{ PROJECTS_HERO_LEAD }}</p>
     </header>
 
-    <div class="projects-page__layout">
+    <div v-scroll-reveal class="projects-page__layout">
       <ProjectsFilterSidebar
         class="projects-page__sidebar"
         :search-query="searchQuery"
@@ -34,11 +34,17 @@ const {
       />
 
       <div class="projects-page__main">
-        <p v-if="filteredProjects.length === 0" class="projects-page__empty">
+        <p v-if="filteredProjects.length === 0" v-scroll-reveal class="projects-page__empty">
           Нет проектов по выбранным фильтрам. Измените условия поиска.
         </p>
         <div v-else class="projects-page__list" role="list">
-          <div v-for="p in filteredProjects" :key="p.id" class="projects-page__list-item" role="listitem">
+          <div
+            v-for="(p, index) in filteredProjects"
+            :key="p.id"
+            v-scroll-reveal="{ delayMs: Math.min(index * 60, 480) }"
+            class="projects-page__list-item"
+            role="listitem"
+          >
             <ProjectsPortfolioCard :project="p" />
           </div>
         </div>

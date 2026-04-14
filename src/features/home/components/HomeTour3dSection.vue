@@ -29,7 +29,7 @@ const tour3dColumns = [
 </script>
 
 <template>
-  <section class="tour3d" id="projects" aria-labelledby="tour3d-heading">
+  <section v-scroll-reveal class="tour3d" id="projects" aria-labelledby="tour3d-heading">
     <div class="tour3d__inner">
       <h2 id="tour3d-heading" class="tour3d__title">3D Тур</h2>
 

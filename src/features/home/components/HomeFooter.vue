@@ -7,7 +7,7 @@ const { visible, accept } = useCookieConsent()
 </script>
 
 <template>
-  <footer class="foot" id="site-footer" aria-label="Подвал сайта">
+  <footer v-scroll-reveal class="foot" id="site-footer" aria-label="Подвал сайта">
     <div class="foot__inner">
       <RouterLink to="/" class="foot__logo-link">
         <img class="foot__logo" src="/icons/logo.svg" alt="GOODINI" width="145" height="119" />

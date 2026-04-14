@@ -5,15 +5,43 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
  * @returns {{ open: import('vue').Ref<boolean>, rootRef: import('vue').Ref<HTMLElement | null>, toggle: () => void, close: () => void }}
  */
 export function useSkolkovoPopover() {
+  const AUTO_HIDE_MS = 5000
   const open = ref(false)
   /** @type {import('vue').Ref<HTMLElement | null>} */
   const rootRef = ref(null)
+  /** @type {ReturnType<typeof setTimeout> | null} */
+  let hideTimer = null
+
+  function clearHideTimer() {
+    if (hideTimer) {
+      clearTimeout(hideTimer)
+      hideTimer = null
+    }
+  }
+
+  function scheduleAutoHide() {
+    clearHideTimer()
+    hideTimer = setTimeout(() => {
+      open.value = false
+      hideTimer = null
+    }, AUTO_HIDE_MS)
+  }
+
+  function showTemporarily() {
+    open.value = true
+    scheduleAutoHide()
+  }
 
   function toggle() {
-    open.value = !open.value
+    if (open.value) {
+      close()
+      return
+    }
+    showTemporarily()
   }
 
   function close() {
+    clearHideTimer()
     open.value = false
   }
 
@@ -33,9 +61,11 @@ export function useSkolkovoPopover() {
   onMounted(() => {
     document.addEventListener('click', onDocClick)
     document.addEventListener('keydown', onKey)
+    showTemporarily()
   })
 
   onBeforeUnmount(() => {
+    clearHideTimer()
     document.removeEventListener('click', onDocClick)
     document.removeEventListener('keydown', onKey)
   })

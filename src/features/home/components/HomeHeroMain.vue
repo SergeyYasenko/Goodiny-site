@@ -1,14 +1,17 @@
 <script setup>
+import { useLeadRequestModal } from '../../../shared/composables/useLeadRequestModal'
+
+const { openLeadRequestModal } = useLeadRequestModal()
 </script>
 
 <template>
-  <div class="hero-main">
+  <div class="hero-main" v-scroll-reveal>
     <h1 class="hero-main__title">
       Помогаем застройщикам продавать
       <span class="hero-main__accent">быстрее</span>
       и дороже
     </h1>
-    <a class="hero-main__cta" href="#lead">Оставить заявку</a>
+    <button type="button" class="hero-main__cta" @click="openLeadRequestModal">Оставить заявку</button>
   </div>
 </template>
 
@@ -63,6 +66,7 @@
   border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow: 0 12px 36px rgba(47, 143, 255, 0.38);
   transition: filter 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
 }
 
 .hero-main__cta:hover {

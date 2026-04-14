@@ -15,7 +15,7 @@ export const OBJECT_TYPE_FILTERS: readonly ObjectTypeFilterOption[] = [
 export const DEVICE_FILTERS: readonly DeviceFilterOption[] = [
   { id: 'xl', label: 'GOODINI XL' },
   { id: 'ultra', label: 'GOODINI Ultra' },
-  { id: 'desk', label: 'GOODINI Digital Desk', indent: true },
+  { id: 'desk', label: 'GOODINI Digital Desk' },
   { id: 'galaxy', label: 'GOODINI Galaxy' },
 ] as const
 

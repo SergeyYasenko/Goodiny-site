@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
 import VizPillStrip from '../../../shared/components/VizPillStrip.vue'
+import { useLeadRequestModal } from '../../../shared/composables/useLeadRequestModal'
 import {
   PRODUCT_VIZ_STRIPS_HEADING,
   PRODUCT_VIZ_STRIP_TOP,
   PRODUCT_VIZ_STRIP_BOTTOM,
 } from '../constants/productVisualizationStrips'
+
+const { openLeadRequestModal } = useLeadRequestModal()
 </script>
 
 <template>
-  <section class="product-viz" aria-labelledby="product-viz-heading">
+  <section v-scroll-reveal class="product-viz" aria-labelledby="product-viz-heading">
     <div class="product-viz__inner">
       <h2 id="product-viz-heading" class="product-viz__heading">
         {{ PRODUCT_VIZ_STRIPS_HEADING }}
@@ -22,9 +24,9 @@ import {
     </div>
 
     <div class="product-viz__inner product-viz__inner--cta">
-      <RouterLink class="product-viz__cta" :to="{ name: 'home', hash: '#contacts' }">
+      <button type="button" class="product-viz__cta" @click="openLeadRequestModal">
         Оставить заявку
-      </RouterLink>
+      </button>
     </div>
   </section>
 </template>
@@ -86,6 +88,7 @@ import {
   text-decoration: none;
   background: var(--home-accent, #2a6ed8);
   border: 1px solid rgba(255, 255, 255, 0.22);
+  cursor: pointer;
   transition: filter 0.15s ease;
 }
 

@@ -34,18 +34,20 @@ const { open, rootRef, toggle } = useSkolkovoPopover()
   right: var(--home-header-pad-x);
   bottom: calc(var(--home-sk-bottom) + env(safe-area-inset-bottom, 0px));
   z-index: 50;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
+  width: 52px;
+  height: 52px;
 }
 
 .sk__panel {
-  width: min(calc(100vw - 2 * var(--home-header-pad-x)), 360px);
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(calc(100vw - 2 * var(--home-header-pad-x) - 64px), 360px);
 }
 
 .sk__label {
-  margin: 0 0 6px 4px;
+  margin: 0 0 6px 2px;
   font-size: 12px;
   font-weight: 500;
   line-height: 1;
@@ -98,6 +100,8 @@ const { open, rootRef, toggle } = useSkolkovoPopover()
 }
 
 .sk__fab {
+  position: relative;
+  z-index: 1;
   width: 52px;
   height: 52px;
   padding: 0;
@@ -135,13 +139,20 @@ const { open, rootRef, toggle } = useSkolkovoPopover()
 .sk-pop-enter-active,
 .sk-pop-leave-active {
   transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
+    opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .sk-pop-enter-from,
 .sk-pop-leave-to {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translate3d(8px, -50%, 0);
+}
+
+@media (max-width: 640px) {
+  .sk__panel {
+    right: calc(100% + 8px);
+    width: min(calc(100vw - 2 * var(--home-header-pad-x) - 60px), 300px);
+  }
 }
 </style>

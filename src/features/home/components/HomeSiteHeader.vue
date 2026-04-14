@@ -72,6 +72,7 @@ onUnmounted(() => {
       <div
         class="nav-shell"
         :class="{ 'nav-shell--open': navOpen }"
+        :aria-hidden="!navOpen"
         @click.self="closeMenu"
       >
         <nav class="nav-pill" aria-label="Основная навигация">
@@ -261,7 +262,7 @@ onUnmounted(() => {
     position: fixed;
     inset: 0;
     z-index: 18;
-    display: none;
+    display: flex;
     flex: none;
     width: 100%;
     max-width: none;
@@ -277,10 +278,25 @@ onUnmounted(() => {
     background: rgba(15, 15, 15, 0.78);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0.32s;
   }
 
   .nav-shell--open {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition:
+      opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0s;
   }
 
   .nav-pill {
@@ -291,12 +307,42 @@ onUnmounted(() => {
     border-radius: 16px;
     padding: 8px;
     gap: 6px;
+    opacity: 0;
+    transform: translate3d(0, -14px, 0) scale(0.985);
+    transition:
+      opacity 0.38s cubic-bezier(0.16, 1, 0.32, 1),
+      transform 0.38s cubic-bezier(0.16, 1, 0.32, 1);
+    will-change: opacity, transform;
+  }
+
+  .nav-shell--open .nav-pill {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition-delay: 0.06s;
   }
 
   .nav-pill__link,
   .nav-pill__cta {
     width: 100%;
     padding: var(--home-nav-link-pad-y) var(--home-nav-cta-pad-x);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-shell {
+      transition: none;
+      transform: none;
+    }
+
+    .nav-shell--open {
+      transition: none;
+    }
+
+    .nav-pill,
+    .nav-shell--open .nav-pill {
+      transition: none;
+      transform: none;
+      opacity: 1;
+    }
   }
 }
 </style>

@@ -184,4 +184,12 @@ onMounted(() => tryPlay())
 .video-card__arrow {
   display: block;
 }
+
+@media (max-width: 1024px) {
+  .video-card__video {
+    object-fit: contain;
+    object-position: center;
+    background: #111;
+  }
+}
 </style>

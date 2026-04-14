@@ -12,7 +12,7 @@ const rowBottomVideos = computed(() => PRODUCT_VIDEO_CARDS.slice(2, 4))
 
 <template>
   <div class="product-equip">
-    <header class="product-equip__hero">
+    <header v-scroll-reveal class="product-equip__hero">
       <h1 class="product-equip__hero-title">
         Архитектурная <span class="product-equip__accent">голограмма</span> для офиса продаж
       </h1>
@@ -22,7 +22,7 @@ const rowBottomVideos = computed(() => PRODUCT_VIDEO_CARDS.slice(2, 4))
       </p>
     </header>
 
-    <section class="product-equip__block" aria-labelledby="equipment-heading">
+    <section v-scroll-reveal class="product-equip__block" aria-labelledby="equipment-heading">
       <h2 id="equipment-heading" class="product-equip__section-title">Оборудование</h2>
 
       <div class="product-equip__grid">

@@ -41,12 +41,13 @@ const steps: AboutPathStep[] = [
 <template>
   <section class="path" aria-labelledby="path-heading">
     <div class="path__inner">
-      <h2 id="path-heading" class="path__title">Путь к результату</h2>
+      <h2 id="path-heading" v-scroll-reveal class="path__title">Путь к результату</h2>
 
       <ul class="path__rows" role="list">
         <li
           v-for="(step, i) in steps"
           :key="step.title"
+          v-scroll-reveal="{ delayMs: Math.min(i * 55, 440) }"
           class="path-row"
           :class="{ 'path-row--reverse': i % 2 === 1 }"
         >
